@@ -196,3 +196,12 @@ For example:
 ## Serving static files from a package
 
 The `Mux.pkgfiles` middleware (included in `Mux.defaults`) serves static files under the `assets` directory in any Julia package at `/pkg/<PACKAGE>/`.
+
+## Using Mux in Production
+
+While Mux should be perfectly useable in a Production environment, it is not
+recommended to use the `Mux.defaults` stack for a Production application. The
+`basiccatch` middleware it includes will dump potentially sensitive stacktraces
+to the client on error, which is probably not what you want to be serving to
+your clients! It would therefore be safer to make a default stack for
+Production that does not include this middleware.
